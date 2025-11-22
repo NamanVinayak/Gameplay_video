@@ -1,0 +1,16 @@
+fastapi[standard]>=0.115.0
+httpx>=0.24.0
+uvicorn>=0.27.0
+python-dotenv>=1.0.0
+openai>=1.0.0
+pydantic-settings>=2.0.0
+requests>=2.31.0
+opencv-python>=4.10.0
+numpy>=1.24.0
+Pillow>=10.0.0
+indic-transliteration>=2.3.0
+ultralytics>=8.3.0
+elevenlabs>=1.0.0
+indic-transliteration>=2.3.0
+# For Face Tracking (if we reuse it)
+ultralytics>=8.3.0

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Generator - Clip App 2</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Video Generator</h1>
+            <p class="subtitle">Create short-form videos with AI voiceover and subtitles</p>
+        </header>
+
+        <main>
+            <form id="videoForm">
+                <div class="form-group">
+                    <label for="script">Script Text *</label>
+                    <textarea 
+                        id="script" 
+                        name="script" 
+                        rows="6" 
+                        placeholder="Enter the text you want to convert to speech..."
+                        required
+                    ></textarea>
+                    <small class="help-text">The text that will be spoken in your video</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="voiceProvider">Voice Provider *</label>
+                        <select id="voiceProvider" name="voice_provider" required>
+                            <option value="openai">OpenAI (Fast & Reliable)</option>
+                            <option value="elevenlabs">ElevenLabs (Premium Quality)</option>
+                            <option value="runpod">RunPod (Custom Voices)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="voiceId">Voice *</label>
+                        <input 
+                            type="text" 
+                            id="voiceId" 
+                            name="voice_id" 
+                            value="alloy"
+                            placeholder="e.g., alloy, echo, fable"
+                            required
+                        >
+                        <small class="help-text">OpenAI: alloy, echo, fable, onyx, nova, shimmer</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="videoPath">Background Video Path *</label>
+                    <input 
+                        type="text" 
+                        id="videoPath" 
+                        name="gameplay_video_path" 
+                        placeholder="/path/to/your/video.mp4"
+                        required
+                    >
+                    <small class="help-text">Full path to your background video file</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="referenceAudio">Reference Audio (Optional)</label>
+                    <input 
+                        type="text" 
+                        id="referenceAudio" 
+                        name="reference_audio_path" 
+                        placeholder="/path/to/reference.mp3"
+                    >
+                    <small class="help-text">For voice cloning (RunPod only)</small>
+                </div>
+
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    <span class="btn-text">Generate Video</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span> Processing...
+                    </span>
+                </button>
+            </form>
+
+            <div id="statusMessage" class="status-message" style="display: none;"></div>
+            
+            <div id="resultSection" class="result-section" style="display: none;">
+                <h2>✅ Video Generated Successfully!</h2>
+                <div class="result-info">
+                    <p><strong>Job ID:</strong> <span id="jobId"></span></p>
+                    <a id="downloadLink" class="btn-download" href="#" target="_blank">
+                        📥 Download Final Video
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>💡 <strong>Tip:</strong> The video will be automatically cut to match your voiceover duration</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
