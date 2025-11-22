@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A FastAPI-based video automation tool that generates short-form gameplay videos with AI-generated voiceovers and animated subtitles. The application processes scripts through a pipeline: text-to-speech → transcription → video processing → subtitle rendering.
 
+**Current Status:** This project is adapted from `clip_app_1` which has working YOLO face tracking for 9:16 aspect ratio conversion with subject-centered cropping. The YOLO implementation from that project needs to be integrated here. The subtitle rendering works but has visual issues that need fixing.
+
 ## Development Commands
 
 ### Setup
@@ -67,7 +69,8 @@ The application follows a sequential 4-step pipeline (main.py:48-159):
 
 **modules/video_processor.py**
 - FFmpeg-based video operations
-- `create_vertical_clip()`: Crops to 9:16 (1080x1920) centered on face position
+- `create_vertical_clip()`: Crops to 9:16 (1080x1920) - **Currently uses center crop only**
+- **TODO:** Integrate YOLO face/subject tracking from `clip_app_1` for intelligent cropping
 - `merge_audio_video()`: Mixes TTS (100%) with gameplay audio (10% ducking)
 - `composite_subtitles()`: Overlays transparent subtitle video using ProRes 4444
 
@@ -144,3 +147,41 @@ outputs/job_YYYYMMDD_HHMMSS/
 
 ### Subtitle Word Timing
 The subtitle renderer handles gaps between words (up to 1.5s) by keeping the last word visible. This prevents flashing during natural speech pauses (subtitle_renderer.py:180-238).
+
+## Known Issues & TODOs
+
+### Missing YOLO Integration (High Priority)
+**Context:** The `clip_app_1` project has working YOLO face tracking that successfully:
+- Converts reels to 9:16 aspect ratio
+- Centers on the main subject (person/face)
+- Uses YOLOv8 for subject detection
+
+**Current Implementation:** `video_processor.py:108-124` uses simple center cropping:
+```python
+face_x=width//2, # Center
+face_y=height//2, # Center
+```
+
+**What Needs to be Done:**
+1. Import YOLO model from `ultralytics` package (already in requirements.txt)
+2. Detect main subject (person) in gameplay video frames
+3. Track subject centroid across frames for smooth cropping
+4. Fallback to center crop when no subject detected
+5. Reference `clip_app_1` implementation for working example
+
+**Dependencies:** `ultralytics>=8.3.0` (listed in requirements.txt lines 12 & 16)
+
+### Subtitle Visual Issues
+Subtitles render but have visual problems inherited from `clip_app_1`. Known issues:
+- Text effects may not render correctly
+- Font loading fallbacks to default
+- No system fonts included (Arial-Bold, Impact referenced but not bundled)
+
+### Setup Prerequisites Not Documented
+Before first run, ensure:
+1. FFmpeg installed in system PATH
+2. Python dependencies: `pip install -r requirements.txt`
+3. `.env` file created from `.env.example` with API keys
+4. Test files updated to use relative paths (currently hardcoded to `/Users/naman/Downloads/`)
+
+See `ISSUES_ANALYSIS.md` for complete list of 12 discovered issues and fixes.
