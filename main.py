@@ -20,6 +20,30 @@ from modules.face_tracker import FaceTracker
 # Setup Logger
 logger = setup_logger("Main", settings.outputs_dir / "app.log")
 
+# ============================================================================
+# TODO - REMAINING TASKS (See TODO.md for full details)
+# ============================================================================
+# 1. [HIGH PRIORITY] Fix Subtitle Styling Issues
+#    - Text effects may not render correctly
+#    - Font loading fallbacks to default (Arial-Bold, Impact missing)
+#    - Review: modules/subtitle_renderer.py, subtitle_styles/effects/
+#    - Test all three styles: simple_caption, glow_caption, karaoke_style
+#
+# 2. [HIGH PRIORITY] Remove hardcoded API key in test_runpod_direct.py
+#    - Security issue: RunPod key exposed in line 7
+#    - Load from environment variables instead
+#    - Rotate exposed key before production
+#
+# 3. [MEDIUM] Fix test file hardcoded paths
+#    - test_gen.py uses /Users/naman/Downloads/
+#    - Change to test_assets/example_gameplay.mp4
+#
+# 4. [DONE] YOLO Integration - Complete ✅
+#    - FaceTracker integrated from clip_app_1
+#    - Subject tracking working (tested in clip_app_1)
+#    - See INTEGRATION_COMPLETE.md for details
+# ============================================================================
+
 app = FastAPI(title="YouTube Automation Tool (Clip App 2)")
 
 # Mount static files

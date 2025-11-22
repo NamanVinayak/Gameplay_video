@@ -2,6 +2,32 @@
 Subtitle Renderer Module
 Adapted from VinVideo project for programmatic subtitle rendering
 Generates word-by-word animated subtitle frames
+
+TODO - SUBTITLE STYLING ISSUES TO FIX:
+======================================
+1. Font Loading Issues:
+   - Arial-Bold and Impact referenced but not bundled
+   - Falls back to ImageFont.load_default() which looks bad
+   - Need to: Bundle fonts OR use system fonts with proper paths
+
+2. Text Effects May Not Render:
+   - VinVideo effects from subtitle_styles/effects/ may fail
+   - Need to test: outline, glow, karaoke modes
+   - Verify WordHighlightEffects and TextEffects work correctly
+
+3. Testing Required:
+   - Test each style independently: simple_caption, glow_caption, karaoke_style
+   - Verify transparent PNG frames render correctly
+   - Check ProRes 4444 video encoding works
+   - Validate subtitle compositing onto final video
+
+4. Potential Fixes:
+   - Add font files to repository (subtitle_styles/fonts/)
+   - Update font paths in styles.json
+   - Add better error handling for missing fonts
+   - Test on actual video with all three styles
+
+See TODO.md for complete task list.
 """
 
 import json
