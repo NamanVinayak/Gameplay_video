@@ -1,0 +1,16 @@
+fastapi[standard]>=0.115.0
+ultralytics>=8.3.0
+opencv-python>=4.10.0
+httpx>=0.27.0
+python-dotenv>=1.0.0
+python-multipart>=0.0.9
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+websockets>=12.0
+
+# Transliteration for subtitle system
+indic-transliteration>=2.3.0
+
+# Subtitle rendering (from VinVideo project)
+Pillow>=10.0.0  # Image manipulation for subtitle frames
+numpy>=1.24.0   # Frame manipulation

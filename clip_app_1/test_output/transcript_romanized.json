@@ -1,0 +1,121 @@
+{
+  "language": "hi",
+  "segments": [
+    {
+      "words": [
+        {
+          "text": "नमस्ते",
+          "text_roman": "Namaste",
+          "start": 0.5,
+          "end": 1.0
+        },
+        {
+          "text": "दोस्तों",
+          "text_roman": "doston",
+          "start": 1.1,
+          "end": 1.5
+        },
+        {
+          "text": ",",
+          "text_roman": ",",
+          "start": 1.5,
+          "end": 1.6
+        },
+        {
+          "text": "स्वागत",
+          "text_roman": "swagat",
+          "start": 1.8,
+          "end": 2.2
+        },
+        {
+          "text": "है",
+          "text_roman": "hai",
+          "start": 2.3,
+          "end": 2.5
+        },
+        {
+          "text": "मेरे",
+          "text_roman": "mere",
+          "start": 2.6,
+          "end": 2.9
+        },
+        {
+          "text": "व्लॉग",
+          "text_roman": "vlog",
+          "start": 3.0,
+          "end": 3.4
+        },
+        {
+          "text": "में",
+          "text_roman": "mein",
+          "start": 3.5,
+          "end": 3.8
+        },
+        {
+          "text": ".",
+          "text_roman": ".",
+          "start": 3.8,
+          "end": 3.9
+        }
+      ]
+    },
+    {
+      "words": [
+        {
+          "text": "आज",
+          "text_roman": "Aaj",
+          "start": 4.5,
+          "end": 4.8
+        },
+        {
+          "text": "हम",
+          "text_roman": "hum",
+          "start": 4.9,
+          "end": 5.1
+        },
+        {
+          "text": "बात",
+          "text_roman": "baat",
+          "start": 5.2,
+          "end": 5.5
+        },
+        {
+          "text": "करेंगे",
+          "text_roman": "karenge",
+          "start": 5.6,
+          "end": 6.0
+        },
+        {
+          "text": "AI",
+          "text_roman": "AI",
+          "start": 6.1,
+          "end": 6.5
+        },
+        {
+          "text": "के",
+          "text_roman": "ke",
+          "start": 6.6,
+          "end": 6.8
+        },
+        {
+          "text": "बारे",
+          "text_roman": "baare",
+          "start": 6.9,
+          "end": 7.2
+        },
+        {
+          "text": "में",
+          "text_roman": "mein",
+          "start": 7.3,
+          "end": 7.6
+        },
+        {
+          "text": ".",
+          "text_roman": ".",
+          "start": 7.6,
+          "end": 7.7
+        }
+      ]
+    }
+  ]
+}

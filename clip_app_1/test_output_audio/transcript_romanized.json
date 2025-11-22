@@ -1,0 +1,101 @@
+{
+  "language": "hi",
+  "segments": [
+    {
+      "text": "नमस्ते दोस्तों, स्वागत है मेरे व्लॉग में. आज हम बात करेंगे एआई के बारे में.",
+      "words": [
+        {
+          "text": "नमस्ते",
+          "start": 0.0,
+          "end": 0.6,
+          "text_roman": "Namaste"
+        },
+        {
+          "text": "दोस्तों",
+          "start": 0.6,
+          "end": 1.2,
+          "text_roman": "doston"
+        },
+        {
+          "text": "स्वागत",
+          "start": 1.4,
+          "end": 1.9,
+          "text_roman": "swagat"
+        },
+        {
+          "text": "है",
+          "start": 1.9,
+          "end": 2.1,
+          "text_roman": "hai"
+        },
+        {
+          "text": "मेरे",
+          "start": 2.1,
+          "end": 2.4,
+          "text_roman": "mere"
+        },
+        {
+          "text": "व्लॉग",
+          "start": 2.4,
+          "end": 2.9,
+          "text_roman": "vlog"
+        },
+        {
+          "text": "में",
+          "start": 2.9,
+          "end": 3.2,
+          "text_roman": "mein"
+        },
+        {
+          "text": "आज",
+          "start": 3.8,
+          "end": 4.1,
+          "text_roman": "Aaj"
+        },
+        {
+          "text": "हम",
+          "start": 4.1,
+          "end": 4.3,
+          "text_roman": "hum"
+        },
+        {
+          "text": "बात",
+          "start": 4.3,
+          "end": 4.6,
+          "text_roman": "baat"
+        },
+        {
+          "text": "करेंगे",
+          "start": 4.6,
+          "end": 5.0,
+          "text_roman": "karenge"
+        },
+        {
+          "text": "एआई",
+          "start": 5.0,
+          "end": 5.5,
+          "text_roman": "AI"
+        },
+        {
+          "text": "के",
+          "start": 5.5,
+          "end": 5.7,
+          "text_roman": "ke"
+        },
+        {
+          "text": "बारे",
+          "start": 5.7,
+          "end": 6.0,
+          "text_roman": "baare"
+        },
+        {
+          "text": "में",
+          "start": 6.0,
+          "end": 6.3,
+          "text_roman": "mein"
+        }
+      ],
+      "text_roman": "Namaste doston swagat hai mere vlog mein Aaj hum baat karenge AI ke baare mein"
+    }
+  ]
+}
