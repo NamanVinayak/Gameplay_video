@@ -1,10 +1,17 @@
 import requests
 import json
 
+from config import settings
+import os
+
 # Test RunPod Chatterbox API directly
-url = "https://api.runpod.ai/v2/4fb7cwijyp7xge/run"
+if not settings.runpod_endpoint_id or not settings.runpod_api_key:
+    print("❌ Error: RUNPOD_ENDPOINT_ID or RUNPOD_API_KEY not set in environment/config")
+    exit(1)
+
+url = f"https://api.runpod.ai/v2/{settings.runpod_endpoint_id}/run"
 headers = {
-    "Authorization": "Bearer rpa_MBB20AN2T8P8AFLINDQH9PB8XBXVB5KUVT0DQ99J12yoxr",
+    "Authorization": f"Bearer {settings.runpod_api_key}",
     "Content-Type": "application/json"
 }
 payload = {
