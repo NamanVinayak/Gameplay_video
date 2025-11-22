@@ -1,10 +1,23 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Test RunPod Chatterbox API directly
-url = "https://api.runpod.ai/v2/4fb7cwijyp7xge/run"
+RUNPOD_API_KEY = os.getenv("RUNPOD_API_KEY")
+RUNPOD_ENDPOINT_ID = os.getenv("RUNPOD_ENDPOINT_ID", "4fb7cwijyp7xge")
+
+if not RUNPOD_API_KEY:
+    print("❌ Error: RUNPOD_API_KEY not found in environment variables")
+    print("Please set RUNPOD_API_KEY in your .env file")
+    exit(1)
+
+url = f"https://api.runpod.ai/v2/{RUNPOD_ENDPOINT_ID}/run"
 headers = {
-    "Authorization": "Bearer rpa_MBB20AN2T8P8AFLINDQH9PB8XBXVB5KUVT0DQ99J12yoxr",
+    "Authorization": f"Bearer {RUNPOD_API_KEY}",
     "Content-Type": "application/json"
 }
 payload = {
@@ -16,7 +29,8 @@ payload = {
 }
 
 print(f"Testing RunPod API: {url}")
-print(f"Headers: {json.dumps({k: v[:20] + '...' if k == 'Authorization' else v for k, v in headers.items()}, indent=2)}")
+print(f"Using API key from environment: {RUNPOD_API_KEY[:10]}...{RUNPOD_API_KEY[-4:]}")
+print(f"Headers: {json.dumps({k: '***REDACTED***' if k == 'Authorization' else v for k, v in headers.items()}, indent=2)}")
 print(f"Payload: {json.dumps(payload, indent=2)}")
 print("\nSending request...")
 
