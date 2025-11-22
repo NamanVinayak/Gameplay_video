@@ -32,8 +32,10 @@ For detailed setup instructions, including environment variables and API keys, p
 
 ## Testing
 
-A sample video is included in `test_assets/example_gameplay.mp4`. You can run the test script to verify your setup:
+A sample video and audio file are included in `test_assets/`. You can run the test script to verify your setup:
 
 ```bash
 python test_gen.py
 ```
+
+This script uses `test_assets/example_gameplay.mp4` and `test_assets/generated_audio.mp3` to test the pipeline without using API credits for TTS.
