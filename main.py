@@ -15,6 +15,7 @@ from modules.voice_generator import VoiceGenerator
 from modules.transcriber import Transcriber
 from modules.video_processor import VideoProcessor
 from modules.subtitle_renderer import SubtitleRenderer
+from modules.face_tracker import FaceTracker
 
 # Setup Logger
 logger = setup_logger("Main", settings.outputs_dir / "app.log")
@@ -92,32 +93,43 @@ async def process_script(request: ScriptRequest, background_tasks: BackgroundTas
         audio_duration = get_duration(audio_path)
         
         # Cut video to match audio duration
-        # For MVP, we just take the first N seconds of the gameplay video
-        # TODO: Implement smart clip selection or random start
         gameplay_path = Path(request.gameplay_video_path)
         if not gameplay_path.exists():
             raise FileNotFoundError(f"Gameplay video not found: {gameplay_path}")
-            
-        # Create vertical crop (center)
-        # We need source dimensions first
-        cmd = ['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'json', str(gameplay_path)]
-        info = json.loads(subprocess.check_output(cmd))
-        width = info['streams'][0]['width']
-        height = info['streams'][0]['height']
-        
-        # Center crop logic (simple)
-        # For gameplay, center is usually safe. 
-        # If we had face tracking, we'd use it here.
-        # Let's just use center for now.
-        
-        # Create base video clip
+
+        # Track face/subject position using YOLO
+        logger.info("Step 3a: Tracking subject position with YOLO...")
+        face_tracker = FaceTracker(job_folder)
+
+        # Convert duration to end timestamp
+        hours = int(audio_duration // 3600)
+        minutes = int((audio_duration % 3600) // 60)
+        seconds = int(audio_duration % 60)
+        end_time = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+        tracking_data = face_tracker.track_faces_in_clip(
+            video_path=gameplay_path,
+            start_time="00:00:00",
+            end_time=end_time,
+            sample_rate=5  # Sample every 5 frames
+        )
+
+        face_x = tracking_data['face_center_x']
+        face_y = tracking_data['face_center_y']
+        width = tracking_data['source_width']
+        height = tracking_data['source_height']
+
+        logger.info(f"Subject detected at: ({face_x}, {face_y})")
+
+        # Create base video clip with face-centered crop
+        logger.info("Step 3b: Creating vertical clip...")
         base_video_path = job_folder / "base_video.mp4"
         video_processor.create_vertical_clip(
             video_path=gameplay_path,
-            start_time="00:00:00", # Start from beginning
+            start_time="00:00:00",
             duration=audio_duration,
-            face_x=width//2, # Center
-            face_y=height//2, # Center
+            face_x=face_x,
+            face_y=face_y,
             source_width=width,
             source_height=height,
             output_name="base_video.mp4"
