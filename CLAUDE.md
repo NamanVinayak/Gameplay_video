@@ -43,6 +43,28 @@ python test_gen.py
 python test_runpod_direct.py
 ```
 
+### Using the Application
+
+**Web Interface:**
+- Navigate to `http://localhost:8000` in your browser
+- Fill in: script text, voice provider (OpenAI/ElevenLabs/RunPod), voice ID, video path
+- Submit form → server processes → download link appears with job ID
+- Web UI located in `static/` (index.html, app.js, style.css)
+
+**API Endpoint:**
+```bash
+POST /process_script
+Content-Type: application/json
+
+{
+  "script": "Your script text here",
+  "voice_provider": "openai",  # or "elevenlabs", "runpod"
+  "voice_id": "alloy",         # OpenAI voices: alloy, echo, fable, onyx, nova, shimmer
+  "gameplay_video_path": "/path/to/video.mp4",
+  "reference_audio_path": null  # Optional, for RunPod voice cloning
+}
+```
+
 ## Architecture
 
 ### Processing Pipeline
