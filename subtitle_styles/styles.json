@@ -29,8 +29,8 @@
         },
         "typography": {
             "font_family": "Arial-Bold",
-            "font_size": 110,
-            "font_size_highlighted": 120,
+            "font_size": 1100,
+            "font_size_highlighted": 1300,
             "text_alignment": "center",
             "text_transform": "uppercase",
             "colors": {
@@ -47,7 +47,7 @@
             }
         },
         "effect_parameters": {
-            "outline_width": 8
+            "outline_width": 12
         },
         "animation": {
             "type": "word_highlight",
@@ -85,8 +85,8 @@
         },
         "typography": {
             "font_family": "Impact",
-            "font_size": 110,
-            "font_size_highlighted": 110,
+            "font_size": 1100,
+            "font_size_highlighted": 1300,
             "text_alignment": "center",
             "text_transform": "uppercase",
             "font_weight": "bold",
@@ -112,7 +112,7 @@
             "highlightedOpacity": 1.0
         },
         "effect_parameters": {
-            "outline_width": 8,
+            "outline_width": 12,
             "outline_color": [
                 0,
                 0,
@@ -156,8 +156,8 @@
         },
         "typography": {
             "font_family": "Arial-Bold",
-            "font_size": 108,
-            "font_size_highlighted": 108,
+            "font_size": 1100,
+            "font_size_highlighted": 1300,
             "text_alignment": "center",
             "text_transform": "uppercase",
             "font_weight": "800",
@@ -189,7 +189,7 @@
             "glow_radius_highlighted": 0,
             "glow_intensity_normal": 0.0,
             "glow_intensity_highlighted": 0.0,
-            "outline_width": 6,
+            "outline_width": 10,
             "outline_color": [
                 0,
                 0,

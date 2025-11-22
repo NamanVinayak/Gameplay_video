@@ -748,3 +748,100 @@ class WordHighlightEffects:
         img = img.crop((padding, padding, width + padding, height + padding))
         
         return np.array(img)
+    
+    @staticmethod
+    def create_outline_with_size_highlight(words: List[str],
+                                          font_path: str,
+                                          normal_font_size: int,
+                                          highlighted_font_size: int,
+                                          text_color: Tuple[int, int, int],
+                                          outline_color: Tuple[int, int, int],
+                                          outline_width: int,
+                                          highlighted_word_index: int = -1,
+                                          image_size: Tuple[int, int] = (1080, 1920),
+                                          bottom_margin: int = 450) -> np.ndarray:
+        """
+        Create text with outline where highlighted word has larger font size
+        
+        Args:
+            words: List of words to render
+            font_path: Path to font file
+            normal_font_size: Font size for normal words
+            highlighted_font_size: Font size for highlighted word
+            text_color: RGB color for text
+            outline_color: RGB color for outline
+            outline_width: Width of outline
+            highlighted_word_index: Index of word to highlight (-1 = none)
+            image_size: Output image dimensions
+            bottom_margin: Margin from bottom
+        """
+        width, height = image_size
+        padding = 100
+        
+        # Create main canvas
+        img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        
+        # Load fonts
+        try:
+            normal_font = ImageFont.truetype(font_path, normal_font_size)
+            highlighted_font = ImageFont.truetype(font_path, highlighted_font_size)
+        except:
+            normal_font = ImageFont.load_default()
+            highlighted_font = ImageFont.load_default()
+        
+        # Calculate word positions and total width
+        word_data = []
+        total_width = 0
+        max_height = 0
+        
+        for i, word in enumerate(words):
+            font = highlighted_font if i == highlighted_word_index else normal_font
+            bbox = draw.textbbox((0, 0), word, font=font)
+            word_width = bbox[2] - bbox[0]
+            word_height = bbox[3] - bbox[1]
+            
+            word_data.append({
+                'text': word,
+                'width': word_width,
+                'height': word_height,
+                'font': font
+            })
+            total_width += word_width
+            max_height = max(max_height, word_height)
+        
+        # Add spacing between words
+        space_bbox = draw.textbbox((0, 0), " ", font=normal_font)
+        space_width = space_bbox[2] - space_bbox[0]
+        total_width += space_width * (len(words) - 1)
+        
+        # Calculate starting position (centered horizontally, positioned at bottom)
+        x = (width - total_width) // 2
+        y = height - bottom_margin - max_height
+        
+        # Draw each word with outline
+        current_x = x
+        for word_info in word_data:
+            # Draw outline
+            for dx in range(-outline_width, outline_width + 1):
+                for dy in range(-outline_width, outline_width + 1):
+                    if dx*dx + dy*dy <= outline_width*outline_width:
+                        draw.text(
+                            (current_x + dx, y + dy),
+                            word_info['text'],
+                            font=word_info['font'],
+                            fill=(*outline_color, 255)
+                        )
+            
+            # Draw main text
+            draw.text(
+                (current_x, y),
+                word_info['text'],
+                font=word_info['font'],
+                fill=(*text_color, 255)
+            )
+            
+            # Move to next word position
+            current_x += word_info['width'] + space_width
+        
+        return np.array(img)
