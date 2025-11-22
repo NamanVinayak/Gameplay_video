@@ -3,8 +3,8 @@ import json
 
 # Test with existing audio to save ElevenLabs credits
 API_URL = "http://localhost:8000"
-GAMEPLAY_VIDEO = "/Users/naman/Downloads/videoplayback.mp4"
-EXISTING_AUDIO = "/Users/naman/Downloads/clip_app2/clip_app_2/outputs/job_20251120_001334/generated_audio.mp3"
+GAMEPLAY_VIDEO = "test_assets/example_gameplay.mp4"
+EXISTING_AUDIO = "test_assets/generated_audio.mp3"
 
 def test_with_existing_audio():
     """Test transcription and video processing with existing ElevenLabs audio"""
